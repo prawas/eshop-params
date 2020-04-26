@@ -17,7 +17,6 @@
 ### cli
 
     composer update
-    php bin/console assets:install
     php bin/console cache:clear
     php bin/console doctrine:schema:update --force
 

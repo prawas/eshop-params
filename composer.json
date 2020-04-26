@@ -19,6 +19,6 @@
         "symfony/yaml": "4.4.*"
     },
     "autoload": {
-        "psr-4": { "Onest\\EshopParams\\": "" }
+        "psr-4": { "Onest\\EshopParamsBundle\\": "" }
     }
 }
