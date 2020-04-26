@@ -1,0 +1,27 @@
+services:
+    _defaults:
+        # automatically injects dependencies in your services
+        autowire: true
+        # automatically registers your services as commands, event subscribers, etc.
+        autoconfigure: true
+        # this means you cannot fetch services directly from the container via $container->get()
+        # if you need to do this, you can override this setting on individual services
+        public: false
+
+    admin.eshop_params.parameter_class:
+        class: Onest\EshopParamsBundle\Admin\ParameterClassAdmin
+        arguments: [~, Onest\EshopParamsBundle\Entity\ParameterClass, ~]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: Магазин, label: Параметры товаров — Классы, show_in_dashboard: false }
+
+    admin.eshop_params.category_group:
+        class: Onest\EshopParamsBundle\Admin\CategoryGroupAdmin
+        arguments: [~, Onest\EshopParamsBundle\Entity\CategoryGroup, ~]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: Магазин, label: Параметры товаров }
+
+    admin.eshop_params.parameter:
+        class: Onest\EshopParamsBundle\Admin\ParameterAdmin
+        arguments: [~, Onest\EshopParamsBundle\Entity\Parameter, ~]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: Магазин, label: Параметры товаров — Значения, show_in_dashboard: false }
