@@ -4,6 +4,8 @@ namespace Onest\EshopParamsBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
+use App\Entity\Product;
+
 /**
  * @ORM\Entity
  */
