@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Tests;
+namespace Onest\EshopParamsBundle\Tests;
 
 use App\Entity\Category;
 use App\Entity\Product;
