@@ -9,8 +9,8 @@
 
 Должны быть определены сущности:
 
-App\Entity\Product
-App\Entity\Category
+- App\Entity\Product
+- App\Entity\Category
 
 В товар нужно добавить управление параметрами:
 
