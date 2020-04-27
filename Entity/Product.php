@@ -14,13 +14,6 @@ use Onest\EshopParamsBundle\Entity\Parameter;
 class Product
 {
     /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
-     */
-    protected $id;
-
-    /**
      * @ORM\OneToMany(targetEntity="Onest\EshopParamsBundle\Entity\Parameter", mappedBy="product", cascade={"persist", "remove"})
      */
     protected $parameters;
@@ -28,11 +21,6 @@ class Product
     public function __construct()
     {
         $this->parameters = new ArrayCollection();
-    }
-
-    public function getId(): ?int
-    {
-        return $this->id;
     }
 
     /**
