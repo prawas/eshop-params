@@ -38,7 +38,7 @@ final class ParameterAdmin extends AbstractAdmin
 
         $formMapper
             ->add('class', ModelType::class, [
-                'label' => 'Значение',
+                'label' => 'Параметр',
                 'btn_add' => false,
                 'btn_delete' => false,
                 'choices' => $class ? [ $class->getLabel() => $class ] : ($product ? $product->getParametersClasses() : []),
