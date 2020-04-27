@@ -25,3 +25,8 @@ services:
         arguments: [~, Onest\EshopParamsBundle\Entity\Parameter, ~]
         tags:
             - {name: sonata.admin, manager_type: orm, group: Магазин, label: Параметры товаров — Значения, show_in_dashboard: false }
+
+    Onest\EshopParamsBundle\DataFixtures\:
+        resource: './../../DataFixtures'
+        tags:
+            - { name: onest.eshop_params.fixtures }
