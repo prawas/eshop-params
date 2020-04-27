@@ -28,23 +28,23 @@ class CategoryTest extends KernelTestCase
     {
         $repo = $this->em->getRepository(Category::class);
         $c1 = $repo->findOneBy(['seo_slug' => 'c1']);
-        $this->assertEquals(null, $c1->getCategoryGroupWithParents());
+        $this->assertEquals(null, $c1->searchCategoryGroupBasedOnParents());
     }
 
     public function testCategoryWithOwnParameters()
     {
         $repo = $this->em->getRepository(Category::class);
         $c2 = $repo->findOneBy(['seo_slug' => 'c2']);
-        $this->assertNotEquals(null, $c2->getCategoryGroupWithParents());
-        $this->assertEquals(1, count($c2->getCategoryGroupWithParents()->getparameters()->toArray()));
+        $this->assertNotEquals(null, $c2->searchCategoryGroupBasedOnParents());
+        $this->assertEquals(1, count($c2->searchCategoryGroupBasedOnParents()->getparameters()->toArray()));
     }
 
     public function testCategoryWithParentParameters()
     {
         $repo = $this->em->getRepository(Category::class);
         $c3 = $repo->findOneBy(['seo_slug' => 'c3']);
-        $this->assertNotEquals(null, $c3->getCategoryGroupWithParents());
-        $this->assertEquals(1, count($c3->getCategoryGroupWithParents()->getparameters()->toArray()));
+        $this->assertNotEquals(null, $c3->searchCategoryGroupBasedOnParents());
+        $this->assertEquals(1, count($c3->searchCategoryGroupBasedOnParents()->getparameters()->toArray()));
     }
 
     public function testProductWith2CategoriesParentFirst()

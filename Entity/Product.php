@@ -63,7 +63,7 @@ class Product
         $result = [];
         $maxLevel = -1;
         foreach ($categories as $cat) {
-            $group = $cat->getCategoryGroupWithParents();
+            $group = $cat->searchCategoryGroupBasedOnParents();
             if ($group && $cat->getLvl() > $maxLevel) {
                 $result = $group->getParameters()->toArray();
                 $maxLevel = $cat->getLvl();

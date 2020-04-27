@@ -28,7 +28,7 @@ class Category
         return $this;
     }
 
-    public function getCategoryGroupWithParents(): ?CategoryGroup
+    public function searchCategoryGroupBasedOnParents(): ?CategoryGroup
     {
         $c = $this;
         while ( ! $c->getCategoryGroup() && $c->getParent()) {

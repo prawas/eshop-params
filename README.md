@@ -1,7 +1,6 @@
 ## TODO
 
 - Форма фильтров ???
-- Тесты вынести в бандл
 
 ## Описание
 
@@ -10,7 +9,7 @@
 
 ![параметры групп категорий](https://prawas.s3.amazonaws.com/params-category-group.png "Параметры групп категорий")
 
-После чего, в товаре можно прописывать параметры:
+После чего, в товаре можно прописывать заданные параметры:
 
 ![параметры товара](https://prawas.s3.amazonaws.com/params-product.png "Параметры товара")
 
@@ -60,7 +59,7 @@
             ->add('parameters', CollectionType::class, [
                 'required' => false,
                 'label' => false,
-                'help' => 'Если параметры определены для категории, но список отсутствует, просто   сохраните товар.',
+                'help' => 'Если параметры определены для категории, но список отсутствует, просто сохраните товар.',
                 'type_options' => [
                     'delete' => false,
                 ],
@@ -73,3 +72,81 @@
             ...
         }
     }
+
+### Testing
+
+    bin/console doctrine:fixtures:load --env=test
+
+    bin/phpunit vendor/prawas/eshop-params-bundle
+
+### Пример создания формы фильтров для фронтэнда
+
+    /**
+     * Получить группу категории с учетом родительских.
+     * Если категория привязана к группе, то все ее дочерние категории будут иметь ту же группу,
+     * если они явно не привязаны к другой группе.
+     * @var $categoryGroup CategoryGroup
+     */
+    $categoryGroup = $category->searchCategoryGroupBasedOnParents();
+
+    /**
+     * @var $params Collection|ParameterClass[]
+     */
+    $params = $categoryGroup->getParameters();
+
+    $builder = $this->createFormBuilder();
+
+    foreach ($params as $param) {
+        switch ($param->getType()) {
+            case 'array_string':
+            case 'array_int':
+            case 'array_float':
+                $builder->add('param_' . $param->getId(), ChoiceType::class, [
+                    'label' => $param->getLabel(),
+                    'choices' => array_combine($param->getData(), $param->getData()),
+                    'required' => false,
+                    'placeholder' => 'Не имеет значения',
+                ]);
+            break;
+            case 'string':
+                $builder->add('param_' . $param->getId(), TextType::class, [
+                    'label' => $param->getLabel(),
+                    'required' => false,
+                    'placeholder' => 'Не имеет значения',
+                ]);
+            break;
+            case 'int':
+            case 'float':
+                $builder->add('param_' . $param->getId(), IntervalType::class, [
+                    'label' => $param->getLabel(),
+                    'required' => false,
+                ]);
+            break;
+            case 'bool':
+                $builder->add('param_' . $param->getId(), ChoiceType::class, [
+                    'label' => $param->getLabel(),
+                    'required' => false,
+                    'choices' => [
+                        'Да' => 1,
+                        'Нет' => 2,
+                    ],
+                    'placeholder' => 'Не имеет значения',
+                    'expanded' => true,
+                ]);
+            break;
+            case 'color':
+                $builder->add('param_' . $param->getId(), YandexColorType::class, [
+                    'label' => $param->getLabel(),
+                    'required' => false,
+                    'placeholder' => 'Не имеет значения',
+                ]);
+            break;
+            default:
+                $builder->add('param_' . $param->getId(), TextType::class, [
+                    'label' => $param->getName(),
+                ]);
+            break;
+        }
+    }
+
+    $form = $builder->getForm();
