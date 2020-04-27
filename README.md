@@ -1,3 +1,8 @@
+## TODO
+
+- Форма фильтров ???
+- Тесты вынести в бандл
+
 ## Описание
 
 Бандл создает группы категорий,
@@ -7,25 +12,12 @@
 
 ## Зависимости
 
-Должны быть определены сущности:
+В проекте должны быть определены сущности:
 
-- App\Entity\Product
-- App\Entity\Category
+- App\Entity\Product extends \Onest\EshopParamsBundle\Entity\Product
+- App\Entity\Category extends \Onest\EshopParamsBundle\Entity\Category
 
 В товар нужно добавить управление параметрами:
-
-### TODO: Product extends Onest\EshopParamsBundle\Entity\Product
-
-    class Product
-    {
-        ...
-        /**
-         * @ORM\OneToMany(targetEntity="Onest\EshopParamsBundle\Entity\Parameter", mappedBy="product", cascade={"persist"})
-         */
-        private $parameters;
-        ...
-    }
-
 
     final class ProductAdmin extends AbstractAdmin
     {
@@ -46,29 +38,6 @@
                 'sortable' => 'position',
             ])
             ...
-        }
-    }
-
-В категорию — связь с группой категорий:
-
-### TODO: Category extends Onest\EshopParamsBundle\Entity\Category
-
-    class Category
-    {
-        ...
-        /**
-         * @ORM\ManyToOne(targetEntity="App\Entity\CategoryGroup", inversedBy="categories")
-         */
-        private $categoryGroup;
-        ...
-
-        public function getCategoryGroupWithParents(): ?CategoryGroup
-        {
-            $c = $this;
-            while ( ! $c->getCategoryGroup() && $c->getParent()) {
-                $c = $c->getParent();
-            }
-            return $c->getCategoryGroup();
         }
     }
 
