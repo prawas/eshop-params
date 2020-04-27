@@ -7,27 +7,14 @@ use Doctrine\ORM\Mapping as ORM;
 use Onest\EshopParamsBundle\Entity\CategoryGroup;
 
 /**
- * @ORM\Entity
- * @ORM\Table(name="category")
+ * @ORM\MappedSuperclass
  */
 class Category
 {
     /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
-     */
-    protected $id;
-
-    /**
      * @ORM\ManyToOne(targetEntity="Onest\EshopParamsBundle\Entity\CategoryGroup", inversedBy="categories")
      */
     protected $categoryGroup;
-
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
 
     public function getCategoryGroup(): ?CategoryGroup
     {
