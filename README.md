@@ -10,37 +10,9 @@
 
 ![параметры групп категорий](https://prawas.s3.amazonaws.com/params-category-group.png "Параметры групп категорий")
 
-## Зависимости
+После чего, в товаре можно прописывать параметры:
 
-В проекте должны быть определены сущности:
-
-- App\Entity\Product extends \Onest\EshopParamsBundle\Entity\Product
-- App\Entity\Category extends \Onest\EshopParamsBundle\Entity\Category
-
-В товар нужно добавить управление параметрами:
-
-    final class ProductAdmin extends AbstractAdmin
-    {
-        protected function configureFormFields(FormMapper $formMapper)
-        {
-            ...
-            ->add('parameters', CollectionType::class, [
-                'required' => false,
-                'label' => false,
-                'help' => 'Если параметры определены для категории, но список отсутствует, просто   сохраните товар.',
-                'type_options' => [
-                    'delete' => false,
-                ],
-                'btn_add' => false,
-            ], [
-                'edit' => 'inline',
-                'inline' => 'table',
-                'sortable' => 'position',
-            ])
-            ...
-        }
-    }
-
+![параметры товара](https://prawas.s3.amazonaws.com/params-product.png "Параметры товара")
 
 ## Installation
 
@@ -70,3 +42,34 @@
         ...
         Onest\EshopParamsBundle\EshopParamsBundle::class => ['all' => true],
     ];
+
+## Настройка и зависимости
+
+В проекте должны быть определены сущности:
+
+- App\Entity\Product extends \Onest\EshopParamsBundle\Entity\Product
+- App\Entity\Category extends \Onest\EshopParamsBundle\Entity\Category
+
+В товар нужно добавить управление параметрами:
+
+    final class ProductAdmin extends AbstractAdmin
+    {
+        protected function configureFormFields(FormMapper $formMapper)
+        {
+            ...
+            ->add('parameters', CollectionType::class, [
+                'required' => false,
+                'label' => false,
+                'help' => 'Если параметры определены для категории, но список отсутствует, просто   сохраните товар.',
+                'type_options' => [
+                    'delete' => false,
+                ],
+                'btn_add' => false,
+            ], [
+                'edit' => 'inline',
+                'inline' => 'table',
+                'sortable' => 'position',
+            ])
+            ...
+        }
+    }
