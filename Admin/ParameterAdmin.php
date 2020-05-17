@@ -50,6 +50,18 @@ final class ParameterAdmin extends AbstractAdmin
             return;
         }
 
+        if ($class->getMultiple() && in_array($class->getType(), ['array_string', 'array_int', 'array_float'])) {
+            $formMapper
+            ->add('value_array', ChoiceType::class, [
+                'label' => 'Значение',
+                'required' => false,
+                'choices' => array_combine($class->getData(), $class->getData()),
+                'multiple' => true,
+                'expanded' => true,
+            ]);
+            return;
+        }
+
         switch ($class->getType()) {
             case 'array_string':
                 $formMapper

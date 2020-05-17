@@ -39,6 +39,11 @@ class Parameter
     private $value_float;
 
     /**
+     * @ORM\Column(type="simple_array", nullable=true)
+     */
+    private $value_array;
+
+    /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Product", inversedBy="parameters")
      */
     private $product;
@@ -97,6 +102,18 @@ class Parameter
     public function setValueFloat(?float $value_float): self
     {
         $this->value_float = $value_float;
+
+        return $this;
+    }
+
+    public function getValueArray(): ?array
+    {
+        return $this->value_array;
+    }
+
+    public function setValueArray(?array $value_array): self
+    {
+        $this->value_array = $value_array;
 
         return $this;
     }
