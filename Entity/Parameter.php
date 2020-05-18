@@ -153,6 +153,10 @@ class Parameter
             return $this->string_value;
         }
 
+        if ($this->getClass()->getMultiple() && in_array($this->getClass()->getType(), ['array_string', 'array_int', 'array_float'])) {
+            return $this->value_array;
+        }
+
         switch ($this->getClass()->getType()) {
             case 'array_string':
             case 'string':
