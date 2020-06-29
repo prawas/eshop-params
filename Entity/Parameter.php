@@ -175,4 +175,40 @@ class Parameter
                 return $this->value_string;
         }
     }
+
+    public function setValue($value): self
+    {
+        if ( ! $this->getClass() ) {
+            $this->setValueString(strval($value));
+            return $this;
+        }
+
+        if ($this->getClass()->getMultiple() && in_array($this->getClass()->getType(), ['array_string', 'array_int', 'array_float'])) {
+            $this->value_array = is_array($value) ? $value : \explode(',', $value);
+            return $this;
+        }
+
+        switch ($this->getClass()->getType()) {
+            case 'array_string':
+            case 'string':
+                $this->setValueString(strval($value));
+            break;
+            case 'array_int':
+            case 'int':
+                $this->setValueInt(intval($value));
+            break;
+            case 'array_float':
+            case 'float':
+                $this->setValueFloat(floatval($value));
+            break;
+            case 'bool':
+                $this->setValueBool(boolval($value));
+            break;
+            case 'color':
+                $this->setValueString(strval($value));
+            break;
+        }
+
+        return $this;
+    }
 }
