@@ -19,7 +19,7 @@ class Parameter
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Onest\EshopParamsBundle\Entity\ParameterClass")
+     * @ORM\ManyToOne(targetEntity="Onest\EshopParamsBundle\Entity\ParameterClass", inversedBy="parameters")
      */
     private $class;
 

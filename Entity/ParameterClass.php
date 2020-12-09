@@ -57,6 +57,11 @@ class ParameterClass
      */
     private $suffix;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Onest\EshopParamsBundle\Entity\Parameter", mappedBy="class", cascade={"persist","remove"})
+     */
+    private $parameters;
+
     public function __toString(): string
     {
         return $this->getLabel();
