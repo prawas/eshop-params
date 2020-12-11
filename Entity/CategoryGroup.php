@@ -21,7 +21,7 @@ class CategoryGroup
     private $id;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Category", mappedBy="categoryGroup", cascade={"persist","remove"})
+     * @ORM\OneToMany(targetEntity="App\Entity\Category", mappedBy="categoryGroup")
      */
     private $categories;
 
