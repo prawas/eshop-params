@@ -67,6 +67,21 @@ class ParameterClass
      */
     private $external_id;
 
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $primary = true;
+
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $expanded = false;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $order_priority;
+
     public function __toString(): string
     {
         return $this->getLabel();
@@ -162,6 +177,42 @@ class ParameterClass
     public function setExternalId(?int $external_id): self
     {
         $this->external_id = $external_id;
+
+        return $this;
+    }
+
+    public function getPrimary(): ?bool
+    {
+        return $this->primary;
+    }
+
+    public function setPrimary(?bool $primary): self
+    {
+        $this->primary = $primary;
+
+        return $this;
+    }
+
+    public function getExpanded(): ?bool
+    {
+        return $this->expanded;
+    }
+
+    public function setExpanded(?bool $expanded): self
+    {
+        $this->expanded = $expanded;
+
+        return $this;
+    }
+
+    public function getOrderPriority(): ?int
+    {
+        return $this->order_priority;
+    }
+
+    public function setOrderPriority(?int $order_priority): self
+    {
+        $this->order_priority = $order_priority;
 
         return $this;
     }
