@@ -11,6 +11,8 @@ use Sonata\Form\Type\CollectionType;
 use Sonata\AdminBundle\Form\Type\ModelListType;
 use Sonata\AdminBundle\Form\Type\ModelType;
 
+use Onest\EshopParamsBundle\Entity\ParameterClass;
+
 final class CategoryGroupAdmin extends AbstractAdmin
 {
     protected function configureFormFields(FormMapper $formMapper)
@@ -59,6 +61,13 @@ final class CategoryGroupAdmin extends AbstractAdmin
 
     protected function updateParameters($object)
     {
+        $em = $this->getModelManager()->getEntityManager($this->getClass());
+        $params = $em->getRepository(ParameterClass::class)->findBy(['categoryGroup' => $object]);
+
+        foreach ($params as $par) {
+            $par->setCategoryGroup(null);
+        }
+
         foreach ($object->getParameters() as $par) {
             $par->setCategoryGroup($object);
         }
